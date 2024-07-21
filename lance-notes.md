@@ -35,4 +35,14 @@ int main(void) {
     -Handle exiting the program
 }
 
+Test_variadic.c Notes 
+    Main Function (main()):
 
+The program enters an infinite loop where it continuously prompts the user with "Shell >> ".
+It reads the user input using fgets() and removes the newline character at the end if present.
+
+    Parsing Function (parse_command()):
+
+parse_command() uses strtok() to split the input command into tokens (arguments) based on "-" as delimiter.
+It stores each token into the args array which will be passed on later.
+It terminates the args array with a NULL pointer to indicate the end of arguments.
