@@ -33,7 +33,7 @@ int main() {
 
 /* Function to parse the command into arguments*/
 void parse_command(char *command, char **args) {
-    char *token;
+    char *toke
     int i = 0;
 
     /*Using strtok to split the command into tokens (arguments)*/
@@ -43,4 +43,19 @@ void parse_command(char *command, char **args) {
         token = strtok(NULL, "-");
     }
     args[i] = NULL; /* Set the last argument to NULL to indicate end of args*/
+
+switch (token)
+ 
+ case "ls"/* constant-expression */:
+    execve(usr/bin/ls)/* code */
+    break;
+
+ case "echo"/* constant-expression */:
+   execve(usr/bin/echo) /* code */
+    break;
+
+    case "less"/* constant-expression */:
+   execve(usr/bin/less) /* code */
+ default: printf("Unknown Comand ")
+    break; 
 }
