@@ -1,10 +1,8 @@
-simpleshell_02 ideas
-{
-    I want to group different prototype functions together  in seperate files
+So far I have a program that asks for user input, takes that input and prints it out. 
 
-    -We will need to make sure we have a good understanding of pointer functions and how they work 
+Now we need to add an infinite loop - DONE
 
-    -Do we need to use execve() and then put in whatever command the user inputs?  
-    
-    -does the argument inside execve() need to be a pointer function?
-}
+The program also needs to take in more than one arguement, it only takes one word and no more - WRITTEN/NEEDS DEBUG
+- My program takes multiple inputs but it goes through the loop every time, prints out 'enter command' and then displays the input until all the words are displayed
+- I am not sure how to get it to display the full string on just one line, I was thinking of adding a counter inside of the second while loop
+
