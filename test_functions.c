@@ -1,30 +1,22 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "main.h"
 
 int main()
 {
-  int indefinite = 1;
-
-  while (indefinite != 0)/* Starts infinite loop so user can input command over and over again */
+  while(1) /* Beging infinite loop for shell*/
   {
-      char string[50]; /* Set an array of fifty characters for the user input */
+    char string[50]; /* Create an array so handle user input *
 
-      printf("Enter command: "); /* User inputs commands for the shell */
-      scanf("%s", string); /* Scan for input and assign to string */
+    printf("Enter command: "); /* Ask for command, scan and assign to str */
+    scanf("%s", str);
 
-      char* delimiter = " -"; /* Set our delimiters for the string */
-      char* token = strtok(string, delimiter); /* Taking our string and tokenize it */
+    char* delim = " -"; /* Delimiters set in str tok telling the function when to split */
+    char* token = strtok(str, delim) /* Break down the input into tokens*/
 
-    while (token != NULL) /* go through the string and print each token until we reach the end */
+    while (token != NULL)
     {
-      
-      /*printf("%s\n", token);*/
-      token = strtok(NULL, delimiter); /* Move on to next token*/
-    }  
-    
-    /*token = strtok(NULL, " ");*/
+            
+    token = strtok(NULL, delim);
+    }
   }
-
   return (0);
 }
