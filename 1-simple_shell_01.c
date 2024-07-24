@@ -4,13 +4,23 @@
 
 
 
-int main(void) {
-    int input;
+int main(void)
+{
+    while(1) /* Beging infinite loop for shell*/
+    {
+        char string[50]; /* Create an array so handle user input *
 
-    printf("Enter Comand: ");
-    scanf("%s", input);
+        printf("Enter command: "); /* Ask for command, scan and assign to str */
+        scanf("%s", str);
 
-    /* input to refrence the comand.*/ 
-    printf("you entered %s" , input);
-    return (0);
+        char* delim = " -"; /* Delimiters set in str tok telling the function when to split */
+        char* token = strtok(str, delim) /* Break down the input into tokens*/
+
+        while (token != NULL)
+        {
+            
+            token = strtok(NULL, delim);
+        }
+
     }
+}
