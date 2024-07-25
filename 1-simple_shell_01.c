@@ -1,14 +1,11 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
+#include "main.h"
 
 
 int main(void)
 {
     while(1) /* Beging infinite loop for shell*/
     {
-        char string[50]; /* Create an array so handle user input *
+        char str[50]; /* Create an array so handle user input *
 
         printf("Enter command: "); /* Ask for command, scan and assign to str */
         scanf("%s", str);

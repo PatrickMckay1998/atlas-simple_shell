@@ -1,30 +1,46 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "main.h"
 
 int main()
 {
-  int indefinite = 1;
-
-  while (indefinite != 0)/* Starts infinite loop so user can input command over and over again */
+  while(1) /* Begin infinite loop for shell*/
   {
-      char string[50]; /* Set an array of fifty characters for the user input */
+    char str[50]; /* Create an array so handle user input */
 
-      printf("Enter command: "); /* User inputs commands for the shell */
-      scanf("%s", string); /* Scan for input and assign to string */
+    printf("Enter command: "); /* Ask for command, scan and assign to str */
+    scanf("%s", str);
 
-      char* delimiter = " -"; /* Set our delimiters for the string */
-      char* token = strtok(string, delimiter); /* Taking our string and tokenize it */
+    char* delim = " -"; /* Delimiters set in str tok telling the function when to split */
+    char* token = strtok(str, delim); /* Break down the input into tokens*/
 
-    while (token != NULL) /* go through the string and print each token until we reach the end */
+    const char *name = "/usr/bin/"; /* Using getenv we can obtain the enviornment that is needed for execv (DONT QUOTE ME ON THAT) */
+    const char *env = getenv(name); /* getenv uses the the name ptr to locate the */
+    /*
+    while (token != NULL) I know this i
     {
-      
-      /*printf("%s\n", token);*/
-      token = strtok(NULL, delimiter); /* Move on to next token*/
-    }  
-    
-    /*token = strtok(NULL, " ");*/
+      printf("%s\n", token);
+      token = strtok(NULL, delim);
+    }
+    */
+  }
+  return (0);
+}
+
+
+int main()
+{
+  pid_t child_proc;
+  child_proc = fork();
+
+  if(child_proc == 0)
+  {
+    execve(/usr/bin/ls, NULL, NULL);
+    printf("Unknown command\n");
+    exit(0);
+  }
+  else 
+  {
+    wait(child_proc == NULL);
+    printf("child_proc has finished\n")
   }
 
-  return (0);
 }
