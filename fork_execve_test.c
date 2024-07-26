@@ -1,11 +1,13 @@
-#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
 
 int main()
 {
-  pid_t child_proc; 
   /* create variable for child process */
   /*int status;*/
-  child_proc = fork(); 
+  pid_t child_proc = fork();
   /* Actually creating the child prcess using fork */
 
   if(child_proc == 0) 
