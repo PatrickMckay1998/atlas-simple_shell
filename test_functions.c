@@ -5,16 +5,20 @@ int main(void)
     while(1) 
     /* Beging infinite loop for shell*/
     {
-        char str[50]; 
-        /* Create an array so handle user input */
+        char *str = NULL;
+        /* store pointer to line */
+        size_t len = 0;
+        /* size of the line */
+        ssize_t num_read; 
+        /* Number of characters read by getline */
+        printf(" "); 
+        /* Print out a space and wait for usedr input, later we will add the path I think */
+        str = getline (&str, stdin);
+        /* str gets the string taken by getline */
 
-        printf("Enter command: "); 
-        /* Ask for command, scan and assign to str */
-        scanf("%s", str);
-
-        char* delim = " "; 
+        char* delim = "-"; 
         /* Delimiters set in str tok telling the function when to split */
-        char* token = strtok(str, delim);
+        char* toke = strtok(str, delim);
         /* Break down the input into token(s)*/
       
         pid_t child = fork();
@@ -22,14 +26,7 @@ int main(void)
         if(child == 0) 
         /* check to see if we are in the child process */
         {
-          const char* name = token;
-          getenv(name);
-
-          execve("token", NULL, NULL);
-          /* use execve to run the command which should be whatever token is, I could be wrong */
-          perror("Unknown command"); 
-          /* Nothing should execute after execve UNLESS there is an error with execve in which perror will say unknown command and we will exit with 0 */
-          exit(0);
+         printf("%s\n", toke);
         }
         else 
         {
