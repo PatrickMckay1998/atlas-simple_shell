@@ -24,3 +24,25 @@ we run the execve command. BOOM.
 
 Then we need to use the wait(NULL) outside of the loop which causes the parent to wait for the child process to finish and then it continues on with the parent process which in our case is the infinite loop, so it will execute the command in the child process we get those results then it goes back to asking for another input. 
 BING BANG BOP 
+
+
+HIGH LEVEL OVERVIEW OF CODE
+
+Create the string using  input from printf and scanf
+
+After input is recieved, create variable called delimiter and set it to equal a space then create variable called token and use strtok to tokenize the string that was input previously
+
+Once the string is turned into a token, use fork to create a child process
+
+Check to see if the child process was created successfully
+
+if child process was created successfully then we use the execve command to run whatever command was put in
+
+We error out if the user enters an unknown command
+
+if the execve is successful then we use the wait command and wait for the child process to terminate
+
+then theorhetically the program should wait for another input.
+
+if we need to use getenv to get the PATH for execve to use because getenv compares whatever you set your *name variable to. because in our example for execve we are using usr/bin/ls which is the path for ls so in theory name would be set to ls and then getenv would get that path?
+
