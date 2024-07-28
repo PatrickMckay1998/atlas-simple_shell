@@ -6,6 +6,12 @@ int main(void)
     while(1)
     /* Beging infinite loop for shell*/
     {
+        char* delim = "-"; 
+        /* Delimiters set in str tok telling the function when to split */
+        char* toke;
+        /* Token is a pointer to the first token */
+        pid_t child;
+        /* create variable for child process */
         char *str = NULL;
         /* store pointer to line */
         size_t len = 0;
@@ -17,17 +23,17 @@ int main(void)
         num_read = getline (&str, &len, stdin);
         /* str gets the string taken by getline */
 
-        char* delim = "-";
         /* Delimiters set in str tok telling the function when to split */
-        char* toke = strtok(str, delim);
+        toke = strtok(str, delim);
         /* Break down the input into token(s)*/
 
-        pid_t child = fork();
+        child = fork();
         /* create child process using fork */
         if(child == 0)
         /* check to see if we are in the child process */
         {
          printf("%s\n", toke);
+         printf("num_read = %ld\n", num_read);
         }
         else
         {
