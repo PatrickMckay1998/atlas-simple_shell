@@ -3,15 +3,16 @@
 
 int main(void)
 {
-    while(1)
-    /* Beging infinite loop for shell*/
+    while(1) /* Beging infinite loop for shell*/
     {
-        char* delim = "-"; 
-        /* Delimiters set in str tok telling the function when to split */
+        char* delim = "-";
         char* toke;
-        /* Token is a pointer to the first token */
         pid_t child;
-        /* create variable for child process */
+
+        char* argvec[] = {NULL};
+        char* envec[] = {NULL};
+
+
         char *str = NULL;
         /* store pointer to line */
         size_t len = 0;
@@ -32,13 +33,16 @@ int main(void)
         if(child == 0)
         /* check to see if we are in the child process */
         {
-         printf("%s\n", toke);
-         printf("num_read = %ld\n", num_read);
+         execve(toke, argvec, envec);
+         perror("Unknown command\n");
+         exit(0);
         }
         else
         {
           wait(NULL);
           /* Wait for the child process to terminate */
+          printf("child process has terminated\n");
+          printf("num_read = %ld\n", num_read);
         }
     }
 }
