@@ -67,14 +67,15 @@ int main(void)
 
             while (search_directory[j] != NULL)
             {
-                strcpy(cmd_path, search_dirs[j]);
+                strcpy(command_path, search_dirs[j]);
                 /* copy the string to the comma*/
-                strcat(cmd_path, "/");
-                strcat(cmd_path, argvec[0]);
+                strcat(command_path, "/");
+                strcat(command_path, argvec[0]);
 
                 if (access(command_path, X_OK) == 0)
                 {
                     execve(command_path, argvec, NULL);
+                    
                     perror("execve");
                     exit(EXIT_FAILURE);
                 }
