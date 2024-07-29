@@ -23,26 +23,36 @@ int main(void)
         /* Print out a space and wait for usedr input, later we will add the path I think */
         num_read = getline (&str, &len, stdin);
         /* str gets the string taken by getline */
+        if (num_read == -1)
+        {
+                perror("getline");
+                exit (0);
+        }
 
-        /* Delimiters set in str tok telling the function when to split */
+        i = 0;
         toke = strtok(str, delim);
         /* Break down the input into token(s)*/
+        while (toke != NULL)
+        {
+                argvec[i++] = toke;
+                toke = strtok(NULL, delim);
+        }
+        argvec[i] = NULL;
 
         child = fork();
-        /* create child process using fork */
-        if(child == 0)
-        /* check to see if we are in the child process */
+        /* create child process using fork*/
+        if (child == 0)
         {
-         execve(toke, argvec, envec);
-         perror("Unknown command\n");
-         exit(0);
+            if (execve(argvec[0], argvec, envec) == -1)
+            {
+                perror("execve");
+                exit(EXIT_FAILURE);
+            }
         }
         else
         {
-          wait(NULL);
-          /* Wait for the child process to terminate */
-          printf("child process has terminated\n");
-          printf("num_read = %ld\n", num_read);
+            wait(NULL);
+            printf("Child process has terminated\n");
         }
     }
 }
