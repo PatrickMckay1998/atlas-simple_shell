@@ -10,7 +10,7 @@
 
     for (int i = 0; directories[i] != NULL; i++) {
         snprintf(path, 256, "%s/%s", directories[i], command);
-        if (access(path, X_OK) == 0) { // Check if the command exists and is executable
+        if (access(path, X_OK) == 0) { /* Check if the command exists and is executable*/
             return path; /* Return the full path of the command*/
         }
     }
