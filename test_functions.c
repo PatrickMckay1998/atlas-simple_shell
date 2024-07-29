@@ -28,21 +28,30 @@ int main(void)
         toke = strtok(str, delim);
         /* Break down the input into token(s)*/
 
-        child = fork();
-        /* create child process using fork */
-        if(child == 0)
-        /* check to see if we are in the child process */
-        {
-         execve(toke, argvec, envec);
-         perror("Unknown command\n");
-         exit(0);
+  child = fork(); /* Create child process using fork*/
+        if (child == -1) {
+            perror("fork");
+            free(str);
+            exit(EXIT_FAILURE);
         }
-        else
-        {
-          wait(NULL);
-          /* Wait for the child process to terminate */
-          printf("child process has terminated\n");
-          printf("num_read = %ld\n", num_read);
+        
+        if (child == 0) {
+            /* In child process*/
+            execve(argvec[0], argvec, NULL);
+            perror("execve");
+            free(str);
+            exit(EXIT_FAILURE);
+        } else {
+            /* In parent process*/
+            wait(NULL); /* Wait for the child process to terminate*/
+            printf("child process has terminated\n");
         }
+        
+        /* Free the input string memory*/
+        free(str);
+        str = NULL;
+        len = 0;
     }
+
+    return 0;
 }
