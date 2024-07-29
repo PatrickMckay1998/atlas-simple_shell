@@ -55,10 +55,22 @@ int main(void)
         /* Print out a space and wait for usedr input, later we will add the path I think */
         num_read = getline (&str, &len, stdin);
         /* str gets the string taken by getline */
+        if (num_read == -1)
+        {
+                perror("getline");
+                exit (0);
+        }
 
-        /* Delimiters set in str tok telling the function when to split */
+        i = 0;
         toke = strtok(str, delim);
         /* Break down the input into token(s)*/
+        while (toke != NULL)
+        {
+                argvec[i++] = toke;
+                toke = strtok(NULL, delim);
+        }
+        argvec[i] = NULL;
+
 
   child = fork(); /* Create child process using fork*/
         if (child == -1) {
@@ -77,6 +89,7 @@ int main(void)
             /* In parent process*/
             wait(NULL); /* Wait for the child process to terminate*/
             printf("child process has terminated\n");
+
         }
         
         /* Free the input string memory*/
