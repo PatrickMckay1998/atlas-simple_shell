@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <errno.h>
+#include <sys/wait.h>
 
 #define MAX_INPUT_LENGTH 1024
 #define MAX_ARGS 64
