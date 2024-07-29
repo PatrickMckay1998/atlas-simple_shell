@@ -1,6 +1,38 @@
 #include "main.h"
 
 
+
+
+ {
+    /* Common directories to search for commands*/
+    char *directories[] = {"/bin", "/usr/bin", NULL};
+    char *path = malloc(256); /* Allocate memory for the path*/
+
+    for (int i = 0; directories[i] != NULL; i++) {
+        snprintf(path, 256, "%s/%s", directories[i], command);
+        if (access(path, X_OK) == 0) { // Check if the command exists and is executable
+            return path; /* Return the full path of the command*/
+        }
+    }
+
+    free(path); /* Free memory if command is not found*/
+    return NULL; /* Command not found*/
+}
+
+/*Function to run a command with arguments*/
+void run_command(char *command, char *const args[]) {
+    char *command_path = search_command(command);
+
+    if (command_path == NULL) {
+        fprintf(stderr, "Command not found: %s\n", command);
+        exit(EXIT_FAILURE);
+    }
+   execve(command_path, args, NULL);
+    perror("execve"); /* If execve fails, print error*/
+    free(command_path);
+    exit(EXIT_FAILURE);
+}
+
 int main(void)
 {
     while(1) /* Beging infinite loop for shell*/
